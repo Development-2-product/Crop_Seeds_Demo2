@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactNode } from 'react';
 import { X, Send, CheckCircle2, Loader2 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 interface EnquiryModalProps {
   open: boolean;
@@ -45,7 +45,7 @@ export function EnquiryModal({ open, onClose, cropInterest = '' }: EnquiryModalP
     e.preventDefault();
     setStatus('submitting');
     try {
-      const { error } = await supabase.from('enquiries').insert({
+      const { error } = await getSupabase().from('enquiries').insert({
         name: form.name,
         email: form.email,
         phone: form.phone || null,

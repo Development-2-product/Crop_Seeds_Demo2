@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, Clock, ArrowRight } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -18,7 +18,7 @@ export function ContactPage() {
     e.preventDefault();
     setStatus('submitting');
     try {
-      const { error } = await supabase.from('enquiries').insert({
+      const { error } = await getSupabase().from('enquiries').insert({
         name: form.name,
         email: form.email,
         phone: form.phone || null,
